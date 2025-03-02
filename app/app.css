@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+header{
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+footer{
+  padding: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+svg{
+  width: 16px;
+  height: 16px;
+}
+
+section{
+  padding: 16px;
+}
+
+.modalCarrito {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.contenidoCarrito {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  height: 100%;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.contenidoCarrito h3 {
+  margin-top: 0;
+}
+
+.contenidoCarrito button {
+  margin-top: 20px;
+}
