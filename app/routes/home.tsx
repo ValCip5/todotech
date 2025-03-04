@@ -14,13 +14,14 @@ export default function Home() {
   return (
     <>
     <Navbar />
-    <section className="hero">
+    <section className="hero width1240">
       <h2>Bienvenido a TodoTech</h2>
       <p>Acá vas a encontrar la mejor selección de productos tecnologicos.</p>
       <a>Comprá eso que buscas</a>
     </section>
     
-    <section className="nosotros">
+    <section className="nosotros width1240">
+      <div className="nosotros-text">
       <h2>
         Productos importados al menor precio
       </h2>
@@ -28,6 +29,8 @@ export default function Home() {
         En TodoTech trabajamos con los mejores proveedores para traerte los productos más novedosos al mejor
         precio.
       </p>
+      <img src="https://via.placeholder.com/150" alt="Imagen" />
+      </div>
       <ul>
         <li>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -54,7 +57,7 @@ export default function Home() {
       </ul>
     </section>
 
-    <section className="productos"> {/* Acá entra la lógica, se muestran productos 
+    <section className="productos width1240"> {/* Acá entra la lógica, se muestran productos 
     de la base, se guardan en un carrito y SOLO se pueden comprar si tenés una cuenta.
     - Los usuarios al comprar pueden dejar una reseña del producto, recomendandolo sí o no y se hace un promedio
     - Los productos tienen categorias y se pueden filtrar por ellas
