@@ -8,7 +8,7 @@ const generateToken = (user) => {
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { username, name, surname, email, password } = req.body;
 
     // Verificar si el user ya existe
     const existingUser = await User.findOne({ where: { email } });
@@ -20,12 +20,18 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crear user
-    const user = await User.create({ name, email, password: hashedPassword });
+    const user = await User.create({
+      username,
+      name,
+      surname,
+      email,
+      password: hashedPassword });
 
     // Generar JWT
     const token = generateToken(user);
     res.status(201).json({ message: 'Usuario registrado', token });
   } catch (error) {
+    console.log('Error: ' + error);
     res.status(500).json({ error: 'Error en el servidor' });
   }
 };
