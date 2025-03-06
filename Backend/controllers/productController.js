@@ -40,4 +40,20 @@ const update = async (req, res) => {
   }
 }
 
-module.exports = { list, find, add, update };
+const like = async (req, res) => {
+  let recommendation = {
+    like: true // fijarse el req
+  };
+
+  const product = await Product.findByPk(req.params.id);
+  res.json(product.toJSON());
+
+  product.update({
+    likes: recommendation.like ? product.likes + 1 : product.likes,
+    dislikes: recommendation.like ? product.likes : product.dislikes,
+  })
+
+  res.json(product.toJSON());
+}
+
+module.exports = { list, find, add, update, like };

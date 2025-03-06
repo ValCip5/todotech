@@ -10,7 +10,15 @@ const Product = sequelize.define('Product', {
   },
   price: {
     type: DataTypes.DECIMAL
-  }
+  },
+  likeCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  dislikeCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
 }, {
   freezeTableName: true,
 });

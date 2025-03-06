@@ -5,7 +5,7 @@ async function initDatabase() {
   const Category = require('./models/Category');
   const User = require('./models/User');
   const Comment = require('./models/Comment');
-  const ProductLike = require('./models/ProductLike');
+  const ProductRecommendation = require('./models/ProductRecommendation');
 
   // Associations
 
@@ -58,22 +58,22 @@ async function initDatabase() {
     }
   });
 
-  ProductLike.belongsTo(Product, {
+  ProductRecommendation.belongsTo(Product, {
     as: 'product'
   });
 
-  Product.hasMany(ProductLike, {
+  Product.hasMany(ProductRecommendation, {
     foreignKey: {
       name: 'productId',
       allowNull: false
     }
   });
 
-  ProductLike.belongsTo(User, {
+  ProductRecommendation.belongsTo(User, {
     as: 'user'
   });
 
-  User.hasMany(ProductLike, {
+  User.hasMany(ProductRecommendation, {
     foreignKey: {
       name: 'userId',
       allowNull: false
@@ -105,7 +105,7 @@ async function initDatabase() {
   }])
 
   await Product.bulkCreate([{
-    name: 'Auriculares Red Dragon',
+    name: 'Auriculares RedDragon',
     description: 'Muy piolas',
     price: 5999.99,
     categoryId: 1,
