@@ -1,7 +1,7 @@
 export function Footer() {
     return (
       <footer>
-        <p>© 2021 TodoTech</p>
+        <p>© 2025 TodoTech</p>
       </footer>
     );
   }

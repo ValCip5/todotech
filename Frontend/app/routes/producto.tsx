@@ -1,6 +1,6 @@
 import { redirect } from 'react-router-dom';
-import { Navbar } from "../components/navbar";
-import { Footer } from "../components/footer";
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import { checkAuth } from '../utils/auth';
 
 export async function clientLoader() {

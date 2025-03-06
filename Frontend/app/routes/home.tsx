@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from 'react';
 import type { Route } from "./+types/home";
-import { Navbar } from "../components/navbar";
-import { Footer } from "../components/footer";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import CartaProducto from '../components/CartaProducto';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,6 +12,21 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    async function fetchProductos() {
+      try {
+        const response = await fetch('http://localhost:3000/api/products');
+        const data = await response.json();
+        setProductos(data);
+      } catch (error) {
+        console.error('Error fetching productos:', error);
+      }
+    }
+
+    fetchProductos();
+  }, []);
 
   return (
     <>
@@ -65,158 +82,9 @@ export default function Home() {
      */}
       <h2>Productos disponibles</h2>
       <ul>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
-        <li>
-          <img src="https://via.placeholder.com/150" alt="Producto 1" />
-          <h3>Pley 5</h3>
-          <p>Na pero mirá lo que es esta play amigo es re flama osea guatefak</p>
-          <p>15 de cada 20 usuarios recomiendan este producto</p>
-          <p>Precio: $9999</p>
-          <a>Comprar</a>
-        </li>
+          {productos.map((producto) => (
+            <CartaProducto key={producto.id} producto={producto} />
+          ))}
       </ul>
     </section>
     <Footer />
