@@ -7,7 +7,7 @@ export default [
   route("examinarusuario", "routes/admin/examinarusuario.tsx"),
   route("login", "routes/login.tsx"),
   route("registrarse", "routes/registrarse.tsx"),
-  route("producto", "routes/producto.tsx"),
+  route("productos/:id", "routes/producto.tsx"),
   route("subirproducto", "routes/admin/subirproducto.tsx"),
   route("notfound", "routes/notfound.tsx"),
 ] satisfies RouteConfig;
