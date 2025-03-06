@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface CartaProductoProps {
   producto: {
@@ -7,20 +8,22 @@ interface CartaProductoProps {
     description: string;
     price: number;
     image: string;
-    likes: number;
-    dislikes: number;
+    likeCount: number;
+    dislikeCount: number;
   };
 }
 
 const CartaProducto: React.FC<CartaProductoProps> = ({ producto }) => {
   return (
     <li>
-      <img src={producto.image} alt={producto.name} />
-      <h3>{producto.name}</h3>
-      <p>{producto.description}</p>
-      <p>{producto.likes} de cada 20 usuarios recomiendan este producto</p>
-      <p>Precio: ${producto.price}</p>
-      <a href={`/comprar/${producto.id}`}>Comprar</a>
+      <Link to={`/productos/${producto.id}`}>
+        <img src={producto.image} alt={producto.name} />
+        <h3>{producto.name}</h3>
+        <p>{producto.description}</p>
+        <p>{producto.likeCount} usuarios recomiendan este producto</p>
+        <p>{producto.dislikeCount} usuarios no recomiendan este producto</p>
+        <p>Precio: ${producto.price}</p>
+      </Link>
     </li>
   );
 };
