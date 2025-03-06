@@ -86,11 +86,15 @@ async function initDatabase() {
 
   await User.bulkCreate([{
     username: 'admin',
+    name: 'Admin',
+    surname: 'Admin',
     email: 'admin@gmail.com',
     password: '$2b$10$TYP8VkJDZOJZx4tlRhEHb.08CvuM6J/sZ0pgBlpUrvIxiAIQbHDdO',
     isAdmin: true
   }, {
     username: 'comun',
+    name: 'Valentin',
+    surname: 'Cipriano',
     email: 'comun@gmail.com',
     password: '$2b$10$TYP8VkJDZOJZx4tlRhEHb.08CvuM6J/sZ0pgBlpUrvIxiAIQbHDdO',
     isAdmin: false
