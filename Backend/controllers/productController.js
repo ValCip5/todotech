@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Comment = require('../models/Comment');
 
 const list = async (req, res) => {
   const products = (await Product.findAll({include: ['category', 'user']})).map(product => product.toJSON());
@@ -6,7 +7,12 @@ const list = async (req, res) => {
 }
 
 const find = async (req, res) => {
-  const product = (await Product.findByPk(req.params.id, {include: ['comments']})).toJSON();
+  const product = (await Product.findByPk(req.params.id, {include: [
+    'user', {
+    model: Comment,
+    as: 'comments',
+    include: ['user']
+  }]})).toJSON();
   res.json(product);
 }
 
