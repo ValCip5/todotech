@@ -105,7 +105,7 @@ async function initDatabase() {
   }])
 
   await Product.bulkCreate([{
-    name: 'Auriculares RedDragon',
+    name: 'Auriculares Red Dragon',
     description: 'Muy piolas',
     price: 5999.99,
     categoryId: 1,
