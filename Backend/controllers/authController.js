@@ -56,6 +56,7 @@ const login = async (req, res) => {
     const token = generateToken(user);
     res.json({ message: 'Inicio de sesión exitoso', token });
   } catch (error) {
+    console.log('Error: ' + error);
     res.status(500).json({ error: 'Error en el servidor' });
   }
 };
