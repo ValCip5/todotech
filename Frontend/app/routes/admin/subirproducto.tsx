@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Navbar } from "../../components/navbar";
 import { Footer } from "../../components/footer";
+import { checkAuthAdmin } from "~/utils/auth";
+
+export async function clientLoader() {
+  return checkAuthAdmin();
+}
 
 export function meta({}: Route.MetaArgs) {
     return [
