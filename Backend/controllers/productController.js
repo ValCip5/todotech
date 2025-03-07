@@ -9,7 +9,7 @@ const list = async (req, res) => {
 
 const find = async (req, res) => {
   const product = (await Product.findByPk(req.params.id, {include: [
-    'user', {
+    {
     model: Comment,
     as: 'comments',
     include: ['user']
