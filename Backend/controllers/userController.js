@@ -14,4 +14,15 @@ const list = async (req, res) => {
   res.json(users);
 }
 
-module.exports = { list };
+const deleteUser = async (req, res) => {
+  if (!req.user.isAdmin) {
+    res.status(401).json({ error: 'Las usuarios sólo pueden eliminarse por un administrador' });
+  } else {
+    const user = await User.findByPk(req.params.id);
+    await user.destroy();
+  
+    res.json(user.toJSON());
+  }
+}
+
+module.exports = { list, deleteUser };
