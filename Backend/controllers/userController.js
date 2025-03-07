@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 const { Op } = require('sequelize');
 
 const list = async (req, res) => {
@@ -14,6 +15,16 @@ const list = async (req, res) => {
   res.json(users);
 }
 
+const find = async (req, res) => {
+  const user = (await User.findByPk(req.params.id, {include: [
+    {
+    model: Comment,
+    as: 'comments',
+    include: ['product']
+  }]})).toJSON();
+  res.json(user);
+}
+
 const deleteUser = async (req, res) => {
   if (!req.user.isAdmin) {
     res.status(401).json({ error: 'Las usuarios sólo pueden eliminarse por un administrador' });
@@ -25,4 +36,4 @@ const deleteUser = async (req, res) => {
   }
 }
 
-module.exports = { list, deleteUser };
+module.exports = { list, deleteUser, find };

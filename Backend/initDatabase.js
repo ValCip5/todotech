@@ -15,6 +15,7 @@ async function initDatabase() {
   });
 
   User.hasMany(Comment, {
+    as: 'comments',
     foreignKey: {
       name: 'userId',
       allowNull: false
