@@ -39,7 +39,7 @@ const deleteCategory = async (req, res) => {
   if (!req.user.isAdmin) {
     res.status(401).json({ error: 'Las categorías sólo pueden eliminarse por un administrador' });
   } else {
-    const category = await User.findByPk(req.params.id);
+    const category = await Category.findByPk(req.params.id);
     await category.destroy();
   
     res.json(category .toJSON());
