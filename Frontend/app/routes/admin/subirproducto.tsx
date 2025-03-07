@@ -14,7 +14,7 @@ export function meta({}: Route.MetaArgs) {
     ];
   }
 
-export default function subirProductos() {
+export default function subirProducto() {
     return (
         <>
         <Navbar />
@@ -39,6 +39,33 @@ export default function subirProductos() {
                     </div>
                     <button type="submit">Subir</button>
                 </form>
+
+            <h2 className="tituloCategorias">Lista de categorias</h2>
+            <table className="tablaCategorias">
+                <thead>
+                    <tr>
+                    <th>Categoria</th>
+                    <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>Categoria 1</td>
+                    <td>
+                        <button>Eliminar</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Categoria 2</td>
+                    <td>
+                        <button>Eliminar</button>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+
+                <button>Crear categoría</button>
+
             </section>
         <Footer />
         </>
