@@ -14,7 +14,7 @@ interface Comment {
   id: number;
   user: User;
   text: string;
-  createdAt: string; // Ensure this is a string
+  createdAt: string;
 }
 
 interface Product {

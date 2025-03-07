@@ -55,14 +55,12 @@ export default function examinarUsuario() {
               <th>Apellido</th>
               <th>Usuario</th>
               <th>Email</th>
-              <th>Contraseña</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Nombre</td>
-              <td>Juan</td>
               <td>Juan</td>
               <td>Juan</td>
               <td>Juan</td>

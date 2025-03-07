@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
+interface DecodedToken {
+  isAdmin: boolean;
+}
 
 export function Navbar() {
   const [carritoAbierto, setCarritoAbierto] = useState(() => {
@@ -16,12 +21,17 @@ export function Navbar() {
     return [];
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('authToken');
-      setIsLoggedIn(!!token);
+      if (token) {
+        setIsLoggedIn(true);
+        const decodedToken: DecodedToken = jwtDecode(token);
+        setIsAdmin(decodedToken.isAdmin);
+      }
     }
   }, []);
 
@@ -49,11 +59,8 @@ export function Navbar() {
       localStorage.removeItem('authToken');
     }
     setIsLoggedIn(false);
+    setIsAdmin(false);
     navigate('/login');
-  };
-
-  const addItemToCarrito = (item) => {
-    setCarritoItems([...carritoItems, item]);
   };
 
   const removeItemFromCarrito = (index) => {
@@ -80,6 +87,7 @@ export function Navbar() {
       setCarritoItems([]);
       setCarritoAbierto(false);
       alert('Purchase successful!');
+      navigate('/historialdecompras'); // Redirect to the purchase history page
     } catch (error) {
       console.error('Error during purchase:', error);
       alert('There was an error processing your purchase. Please try again.');
@@ -95,6 +103,8 @@ export function Navbar() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/#nosotros">Nosotros</NavLink>
             <NavLink to="/#productos">Productos</NavLink>
+            {isAdmin && <NavLink to="/panel">Panel</NavLink>}
+            {isAdmin && <NavLink to="/subirproducto">Subir Producto</NavLink>}
           </div>
           <div className="acciones">
             {isLoggedIn ? (
@@ -131,7 +141,14 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <button onClick={handleComprar}>Comprar</button>
+            {carritoItems.length > 0 ? (
+              <>
+                <p>Total: ${carritoItems.reduce((acc, item) => acc + item.price, 0)}</p>
+                <button onClick={handleComprar}>Comprar</button>
+              </>
+            ) : (
+              <p>El carrito está vacío</p>
+            )}
             <button onClick={() => setCarritoAbierto(false)}>Cerrar</button>
           </div>
         </div>

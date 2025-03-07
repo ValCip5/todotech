@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import type { Route } from "./+types/home";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
@@ -9,47 +10,79 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+interface Purchase {
+  id: number;
+  createdAt: string;
+  product: Product;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  likeCount: number;
+  dislikeCount: number;
+}
+
 export default function historialDeCompras() {
+  const [compras, setCompras] = useState<Purchase[]>([]);
+
+  useEffect(() => {
+    async function fetchCompras() {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch('http://localhost:3000/api/purchases/myPurchases', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setCompras(data);
+      } catch (error) {
+        console.error('Error fetching compras:', error);
+      }
+    }
+
+    fetchCompras();
+  }, []);
+
   return (
     <>
-    <Navbar />
-    <section className="historialCompras width1240">
-      <h2>Historial de Compras</h2>
-      <table className="tablaCompras">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Imagen</th>
-              <th>Fecha de Compra</th>
-              <th>Precio</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Producto 1</td>
-              <td>Descripción del producto 1</td>
-              <td>
-                <img src="url_de_la_imagen_1" alt="Producto 1" width="50" />
-              </td>
-              <td>01/03/2025</td>
-              <td>
-                $8000
-              </td>
-            </tr>
-            <tr>
-              <td>Producto 2</td>
-              <td>Descripción del producto 2</td>
-              <td>
-                <img src="url_de_la_imagen_2" alt="Producto 2" width="50" />
-              </td>
-              <td>02/03/2025</td>
-              <td>$8000</td>
-            </tr>
-          </tbody>
-        </table>
-    </section>
-    <Footer />
+      <Navbar />
+      <section className="historialCompras width1240">
+        <h2>Historial de Compras</h2>
+        {compras.length > 0 ? (
+          <table className="tablaCompras">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Imagen</th>
+                <th>Fecha de Compra</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {compras.map((compra) => (
+                <tr key={compra.id}>
+                  <td>{compra.product.name}</td>
+                  <td>{compra.product.description}</td>
+                  <td>
+                    <img src={compra.product.image} alt={compra.product.name} width="50" />
+                  </td>
+                  <td>{new Date(compra.createdAt).toLocaleDateString()}</td>
+                  <td>${compra.product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>No realizaste ninguna compra</p>
+        )}
+      </section>
+      <Footer />
     </>
   );
 }

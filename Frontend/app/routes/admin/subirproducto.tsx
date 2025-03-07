@@ -18,7 +18,7 @@ export default function subirProducto() {
     return (
         <>
         <Navbar />
-            <section className="subirProductos width1240">
+            <section className="subirProducto width1240">
                 <h2>Subir producto</h2>
                 <form className="formularioSubirProductos">
                     <div className="grupoFormulario">
