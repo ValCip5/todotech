@@ -2,6 +2,7 @@ const sequelize = require('./database');
 
 async function initDatabase() {
   const Product = require('./models/Product');
+  const Purchase = require('./models/Purchase');
   const Category = require('./models/Category');
   const User = require('./models/User');
   const Comment = require('./models/Comment');
@@ -47,13 +48,25 @@ async function initDatabase() {
     }
   });
 
-  Product.belongsTo(User, {
+  Purchase.belongsTo(User, {
     as: 'user'
   });
 
-  User.hasMany(Product, {
+  User.hasMany(Purchase, {
+    as: 'purchases',
     foreignKey: {
       name: 'userId',
+      allowNull: false
+    }
+  });
+
+  Purchase.belongsTo(Product, {
+    as: 'product'
+  });
+
+  Product.hasMany(Purchase, {
+    foreignKey: {
+      name: 'productId',
       allowNull: false
     }
   });

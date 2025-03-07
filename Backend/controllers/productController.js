@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Comment = require('../models/Comment');
+const Purchase = require('../models/Purchase');
 
 const list = async (req, res) => {
   const products = (await Product.findAll({include: ['category', 'user']})).map(product => product.toJSON());
@@ -52,7 +53,6 @@ const like = async (req, res) => {
   };
 
   const product = await Product.findByPk(req.params.id);
-  res.json(product.toJSON());
 
   product.update({
     likes: recommendation.like ? product.likes + 1 : product.likes,
@@ -62,4 +62,13 @@ const like = async (req, res) => {
   res.json(product.toJSON());
 }
 
-module.exports = { list, find, add, update, like };
+const purchase = async (req, res) => {
+  const purchase = Purchase.create({
+    productId: req.params.id,
+    userId: req.user.id
+  })
+
+  res.json(purchase.toJSON());
+}
+
+module.exports = { list, find, add, update, like, purchase };
