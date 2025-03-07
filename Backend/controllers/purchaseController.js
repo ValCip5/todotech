@@ -11,9 +11,11 @@ const purchaseProducts = async (req, res) => {
 }
 
 const listForLoggedUser =  async (req, res) => {
-  let purchases = await Purchase.findAll({ where: {
-    userId: req.user.id
-  }});
+  let purchases = await Purchase.findAll({
+    where: {
+      userId: req.user.id
+    },
+    include: 'product'});
 
   res.json(purchases.map(purchase => purchase.toJSON()));  
 }
