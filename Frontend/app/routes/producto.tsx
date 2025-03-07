@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { redirect } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { checkAuth } from '../utils/auth';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,9 +12,9 @@ export function meta({}: Route.MetaArgs) {
 
 interface Comment {
   id: number;
-  user: string;
+  user: User;
   text: string;
-  date: string;
+  createdAt: string; // Ensure this is a string
 }
 
 interface Product {
@@ -29,6 +27,12 @@ interface Product {
   likeCount: number;
   dislikeCount: number;
 }
+
+interface User {
+  id: number;
+  username: string;
+}
+
 
 export default function Producto() {
   const { id } = useParams<{ id: string }>();
@@ -48,6 +52,12 @@ export default function Producto() {
     fetchProduct();
   }, [id]);
 
+  const addToCart = (product: Product) => {
+    const cart = JSON.parse(localStorage.getItem('carrito') || '[]');
+    cart.push(product);
+    localStorage.setItem('carrito', JSON.stringify(cart));
+  };
+
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -62,8 +72,8 @@ export default function Producto() {
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>{product.likeCount} de cada 20 usuarios recomiendan este producto</p>
-            <p>Precio: ${product.price}</p>
-            <a href="#">Agregar al Carrito</a>
+            <p>Precio: <strong>${product.price}</strong></p>
+            <a href="#" onClick={() => addToCart(product)}>Agregar al Carrito</a>
           </li>
         </ul>
 
@@ -75,8 +85,8 @@ export default function Producto() {
 
         {product.comments.map((comment) => (
           <div key={comment.id} className="comentarioHecho">
-            <h4>{comment.user}</h4>
-            <span>{comment.date}</span>
+            <h4>{comment.user.username}</h4>
+            <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
             <p>{comment.text}</p>
           </div>
         ))}

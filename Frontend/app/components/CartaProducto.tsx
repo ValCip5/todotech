@@ -20,9 +20,9 @@ const CartaProducto: React.FC<CartaProductoProps> = ({ producto }) => {
         <img src={producto.image} alt={producto.name} />
         <h3>{producto.name}</h3>
         <p>{producto.description}</p>
-        <p>{producto.likeCount} usuarios recomiendan este producto</p>
-        <p>{producto.dislikeCount} usuarios no recomiendan este producto</p>
-        <p>Precio: ${producto.price}</p>
+        <p className='recom'>{producto.likeCount} usuarios recomiendan este producto</p>
+        <p className='noRecom'>{producto.dislikeCount} usuarios no recomiendan este producto.</p>
+        <p className='precio'>Precio: ${producto.price}</p>
       </Link>
     </li>
   );
