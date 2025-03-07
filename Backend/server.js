@@ -15,6 +15,7 @@ const authRoutes = require('./routes/auth'); // Rutas de autenticación
 const productRoutes = require('./routes/products'); // Rutas de productos
 const purchaseRoutes = require('./routes/purchases'); // Rutas de compras
 const categoryRoutes = require('./routes/categories'); // Rutas de categorías
+const userRoutes = require('./routes/users'); // Rutas de usuarios
 
 // Middleware
 app.use(cors());
@@ -25,6 +26,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
