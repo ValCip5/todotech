@@ -234,3 +234,20 @@ td{
   text-align: center;
   position: relative;
 }
+
+.subirProducto{
+  padding: 96px 64px 96px 64px;
+}
+
+.tituloCategorias{
+  margin-top: 80px;
+  margin-bottom: 48px;
+}
+
+.tablaCategorias{
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
