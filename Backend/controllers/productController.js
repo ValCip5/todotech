@@ -3,7 +3,7 @@ const Comment = require('../models/Comment');
 const Purchase = require('../models/Purchase');
 
 const list = async (req, res) => {
-  const products = (await Product.findAll({include: ['category', 'user']})).map(product => product.toJSON());
+  const products = (await Product.findAll({include: ['category']})).map(product => product.toJSON());
   res.json(products);
 }
 
