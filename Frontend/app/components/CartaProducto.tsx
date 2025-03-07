@@ -10,7 +10,13 @@ interface CartaProductoProps {
     image: string;
     likeCount: number;
     dislikeCount: number;
+    category: Category;
   };
+}
+
+interface Category{
+  id: number;
+  name: string;
 }
 
 const CartaProducto: React.FC<CartaProductoProps> = ({ producto }) => {
@@ -18,6 +24,15 @@ const CartaProducto: React.FC<CartaProductoProps> = ({ producto }) => {
     <li>
       <Link to={`/productos/${producto.id}`}>
         <img src={producto.image} alt={producto.name} />
+        <div className="categoriaExiste">
+            {producto.category ? (
+              <p>{producto.category.name}</p>
+            ) : (
+              <div className='categoriaNoExiste'>
+                <p>Sin categoria</p>
+              </div>
+            )}
+        </div>
         <h3>{producto.name}</h3>
         <p>{producto.description}</p>
         <p className='recom'>{producto.likeCount} usuarios recomiendan este producto</p>

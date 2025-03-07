@@ -12,7 +12,7 @@ export function meta({}: Route.MetaArgs) {
 
 interface Comment {
   id: number;
-  user: User;
+  user: User | null;
   text: string;
   createdAt: string;
 }
@@ -26,11 +26,17 @@ interface Product {
   image: string;
   likeCount: number;
   dislikeCount: number;
+  category: Category;
 }
 
 interface User {
   id: number;
   username: string;
+}
+
+interface Category{
+  id: number;
+  name: string;
 }
 
 
@@ -69,6 +75,15 @@ export default function Producto() {
         <ul>
           <li>
             <img src={product.image} alt={product.name} />
+            <div className="categoriaExiste">
+            {product.category ? (
+              <p>{product.category.name}</p>
+            ) : (
+              <div className='categoriaNoExiste'>
+                <p>Sin categoria</p>
+              </div>
+            )}
+            </div>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>{product.likeCount} de cada 20 usuarios recomiendan este producto</p>
@@ -85,7 +100,13 @@ export default function Producto() {
 
         {product.comments.map((comment) => (
           <div key={comment.id} className="comentarioHecho">
-            <h4>{comment.user.username}</h4>
+            {comment.user ? (
+              <h4>{comment.user.username}</h4>
+            ) : (
+              <div className='usuarioEliminado'>
+                <p>Este usuario ya no existe</p>
+              </div>
+            )}
             <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
             <p>{comment.text}</p>
           </div>
