@@ -13,6 +13,7 @@ const app = express();
 
 const authRoutes = require('./routes/auth'); // Rutas de autenticación
 const productRoutes = require('./routes/products'); // Rutas de productos
+const purchaseRoutes = require('./routes/purchases'); // Rutas de compras
 const categoryRoutes = require('./routes/categories'); // Rutas de categorías
 
 // Middleware
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 // Rutas
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/purchases', purchaseRoutes);
 app.use('/api/categories', categoryRoutes);
 
 const port = process.env.PORT || 3000;
