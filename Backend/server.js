@@ -16,6 +16,7 @@ const productRoutes = require('./routes/products'); // Rutas de productos
 const purchaseRoutes = require('./routes/purchases'); // Rutas de compras
 const categoryRoutes = require('./routes/categories'); // Rutas de categorías
 const userRoutes = require('./routes/users'); // Rutas de usuarios
+const commentRoutes = require('./routes/comments') // Rutas de comentarios
 
 // Middleware
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/users', userRoutes);
+pp.use('/api/comments', commentRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
