@@ -238,7 +238,7 @@ export default function SubirProducto() {
           </tbody>
         </table>
 
-        <button onClick={() => setModalVisible(true)}>Crear categoría</button>
+        <button className="crearC" onClick={() => setModalVisible(true)}>Crear categoría</button>
       </section>
 
       {modalVisible && (

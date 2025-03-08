@@ -7,6 +7,7 @@
 
 h2, h3, h4, h5, h6{
   color: var(--heading-color);
+  letter-spacing: -0.7px;
 }
 
 h2{
@@ -18,6 +19,15 @@ h2{
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  letter-spacing: -0.3px;
+}
+
+a{
+  text-decoration: none;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 header{
@@ -25,11 +35,22 @@ header{
   border-bottom: 1px solid #e0e0e0;
 }
 
+header a{
+  color: #0f0f0f;
+  font-weight: 500;
+}
+
+header a:hover{
+  text-decoration: underline;
+}
+
 footer{
-  padding: 24px 96px 24px 96px;
+  padding: 24px 128px 24px 128px;
   width: auto;
   justify-items: center;
   border-top: 1px solid #e0e0e0;
+  background: #f7f7f7;
+  font-weight: 600;
 }
 
 svg{
@@ -56,10 +77,25 @@ section{
 .contenidoCarrito {
   background: white;
   padding: 20px;
-  width: 300px;
+  width: 450px;
   height: 100%;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
+}
+
+.contenidoCarrito .comprar{
+  background-color: #0f0f0f;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.contenidoCarrito h2{
+  margin-bottom: 16px;
+}
+
+.contenidoCarrito li{
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .contenidoCarrito h3 {
@@ -67,7 +103,18 @@ section{
 }
 
 .contenidoCarrito button {
-  margin-top: 20px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.contenidoCarrito .nombreP, .totalP{
+  font-size: 18px;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
 header{
@@ -103,11 +150,19 @@ nav ul{
 }
 
 h1{
-  flex: 0 0 250px;
+  flex: 0 0 350px;
+}
+
+.superTitulo{
+  font-size: 56px;
+}
+
+.hero p{
+  font-size: 20px;
 }
 
 .acciones{
-  width: 250px;
+  width: 350px;
   display: flex;
   flex: none;
   justify-content: end;
@@ -117,21 +172,62 @@ h1{
 
 .hero{
   width: 100%;
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
   display: flex;
   flex: none;
   flex-direction: column;
   justify-content: center;
+  justify-items: center;
+}
+
+.botonHero{
+  padding: 12px 24px 12px 24px;
+  border-radius: 8px;
+  background-color: #0f0f0f;
+  color: #fff;
+  outline: unset;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  margin: auto;
+} 
+
+button {
+  outline: none;
+  border: none;
 }
 
 .nosotros{
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
   display: flex;
-  gap: 48px;
+  gap: 64px;
+  background: #f3f3f3;
+  color: #fff;
+  border-radius: 16px;
 }
 
 .productos{
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
+}
+
+.nosotros ul li{
+  list-style: none;
+  margin-bottom: 48px;
+}
+
+.nosotros ul li:last-child{
+  margin-bottom: 0px;
+}
+
+.nosotros ul li p{
+  color: var(--paragraph-color);
+}
+
+.nosotros ul li svg{
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  color: var(--heading-color);
 }
 
 .productos ul{
@@ -157,16 +253,24 @@ h1{
 }
 
 .hero p{
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-top: 16px;
+  margin-bottom: 24px;
   color: var(--paragraph-color);
 }
 
+.contenidoCarrito ul{
+  list-style: none;
+  padding: 0;
+}
+
+.carritoV{
+  margin-bottom: 4px;
+}
+
 .seccionRegistrarse, .seccionLogin{
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
   justify-items: center;
   margin: auto;
-  height: 90vh;
 }
 
 form{
@@ -184,7 +288,7 @@ form{
 }
 
 .usuario, .panel{
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
 }
 
 .tablaExaminarUsuario, .tablaPanel{
@@ -236,7 +340,7 @@ td{
 }
 
 .subirProducto{
-  padding: 96px 64px 96px 64px;
+  padding: 128px 64px 128px 64px;
 }
 
 .tituloCategorias{
@@ -251,3 +355,220 @@ td{
   margin-bottom: 32px;
 }
 
+.productos h2{
+  margin-bottom: 48px;
+}
+
+.productos ul li{
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.productos ul li a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.precio{
+  font-weight: 600;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.categoriaExiste{
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 4px 12px 4px 12px;
+  width: fit-content;
+  margin: 12px 0px 12px -2px;
+}
+
+.categoriaExiste p{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.descri{
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.recom{
+  margin-top: 12px;
+}
+
+.botonCarrito{
+  padding: 8px 16px 8px 16px;
+  margin-top: 12px;
+  width: fit-content;
+  border-radius: 8px;
+  background-color: #0f0f0f;
+  color: #fff;
+  outline: unset;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.acciones .botonCarrito{
+  margin-top: unset;
+}
+
+.solo{
+  width: fit-content;
+}
+
+.realizarComentario{
+  padding: 32px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  display: inline-block;
+  width: 100%;
+  margin-top: 128px;
+  margin-bottom: 128px;
+}
+
+.realizarComentario textarea{
+  border-radius: 8px;
+  background: #ececec;
+  border: unset;
+  padding: 16px;
+  font-size: 16px;
+  resize: none;
+}
+
+.realizarComentario p{
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+textarea{
+  width: 100%;
+}
+
+.comentar{
+  margin-bottom: 48px;
+}
+
+.si{
+  margin-right: 8px;
+}
+
+.productoSolo{
+  padding: 128px 64px 128px 64px;
+}
+
+.productoSolo ul li{
+  display: flex;
+  width: 100%;
+}
+
+.productoSolo ul li{
+  width: 100%;
+}
+
+.izq, .der{
+  width: 100%;
+}
+
+.recomendaciones{
+  padding: 16px;
+  margin: 12px 0px 12px 0px;
+  background: #ececec;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.botonGeneral{
+  margin-top: 12px;
+  padding: 8px 16px 8px 16px;
+  width: fit-content;
+  border-radius: 8px;
+  background-color: #0f0f0f;
+  color: #fff;
+  outline: unset;
+  font-size: 14px;
+}
+
+.comentarioHecho{
+  border-left: 6px solid #0f0f0f;
+  padding-left: 16px;
+  margin-bottom: 48px;
+}
+
+.comentarioHecho span{
+  color: #4f4f4f;
+}
+
+.comentarioHecho p{
+  margin: 4px 0px 8px 0px;
+}
+
+h4{
+  font-size: 20px;
+}
+
+form input, select{
+  padding: 8px 4px 8px 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+form label{
+  margin-bottom: 8px;
+}
+
+.botonLogin, .botonRegistrarse, .encontrarU{
+  padding: 11px 16px 10px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+  background: #0f0f0f;
+}
+
+.buscarU{
+  padding: 8px 4px 8px 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 24px;
+  margin-right: 12px;
+}
+
+.tablaPanel button:first-child{
+  padding: 8px 12px 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-right: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tablaPanel button:last-child, .tablaCategorias button{
+  padding: 8px 12px 8px 12px;
+  background: #ff3333;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.formularioSubirProductos button, .crearC{
+  padding: 8px 12px 8px 12px;
+  background: #0f0f0f;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.formularioSubirProductos{
+  width: 100%;
+}

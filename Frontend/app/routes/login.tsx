@@ -81,7 +81,7 @@ export default function Login() {
               required
             />
           </div>
-          <button type="submit">Login</button>
+          <button className='botonLogin' type="submit">Login</button>
         </form>
       </section>
       <Footer />

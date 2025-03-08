@@ -122,7 +122,7 @@ export default function ExaminarUsuario() {
     <>
       <Navbar />
       <section className="usuario width1240">
-        <h2>Detalles del usuario</h2>
+        <h2>Comentarios del usuario</h2>
 
         {user && (
           <table className="tablaExaminarUsuario primero">

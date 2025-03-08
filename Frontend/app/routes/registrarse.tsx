@@ -80,7 +80,7 @@ export default function Registrarse() {
             <label htmlFor="confirm-password">Confirmar Contraseña</label>
             <input type="password" id="confirm-password" name="confirm-password" required />
           </div>
-          <button type="submit">Registrarse</button>
+          <button className='botonRegistrarse' type="submit">Registrarse</button>
         </form>
       </section>
       <Footer />

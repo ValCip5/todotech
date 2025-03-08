@@ -101,12 +101,13 @@ export default function Panel() {
       <section className="panel width1240">
         <h2>Lista de usuarios</h2>
         <input
+          className='buscarU'
           type="text"
-          placeholder="Buscar usuario"
+          placeholder="Ej. juanceto01"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>Buscar usuario</button>
+        <button className='encontrarU' onClick={handleSearch}>Buscar usuario</button>
         <table className="tablaPanel primero">
           <thead>
             <tr>

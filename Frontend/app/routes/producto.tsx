@@ -71,10 +71,14 @@ export default function Producto() {
   return (
     <>
       <Navbar />
-      <section className='width1240'>
+      <section className='width1240 productoSolo'>
         <ul>
           <li>
-            <img src={product.image} alt={product.name} />
+            <div className='izq'>
+              <img src={product.image} alt={product.name} />
+            </div>
+
+            <div className='der'>
             <div className="categoriaExiste">
             {product.category ? (
               <p>{product.category.name}</p>
@@ -86,16 +90,24 @@ export default function Producto() {
             </div>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
-            <p>{product.likeCount} de cada 20 usuarios recomiendan este producto</p>
+            <div className='recomendaciones'>
+              <p>{product.likeCount} usuarios recomiendan este producto.</p>
+              <p>{product.dislikeCount} usuarios no recomiendan este producto.</p>
+            </div>
             <p>Precio: <strong>${product.price}</strong></p>
-            <a href="#" onClick={() => addToCart(product)}>Agregar al Carrito</a>
+            <button className='botonCarrito solo' onClick={() => addToCart(product)}>Agregar al Carrito</button>
+            </div>
           </li>
         </ul>
 
-        <div className="realizar comentario">
-          <p>¿Recomiendas este producto?<button>sí</button><button>no</button></p>
+        <div className="realizarComentario">
+          <p>Dejá tu comentario</p>
           <textarea></textarea>
-          <button>comentar</button>
+          <button className='botonGeneral comentar'>Comentar</button>
+          <div>
+          <p>¿Recomendas este producto?</p>
+          <button className='botonGeneral si'>Sí</button><button className='botonGeneral no'>No</button>
+          </div>
         </div>
 
         {product.comments.map((comment) => (
@@ -107,8 +119,8 @@ export default function Producto() {
                 <p>Este usuario ya no existe</p>
               </div>
             )}
-            <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
             <p>{comment.text}</p>
+            <span>Comentado el {new Date(comment.createdAt).toLocaleDateString()}</span>
           </div>
         ))}
       </section>
