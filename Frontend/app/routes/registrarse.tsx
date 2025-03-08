@@ -43,7 +43,7 @@ export default function Registrarse() {
 
       alert('Registration successful!');
       navigate('/');
-      // Optionally, redirect the user to another page
+      
     } catch (error) {
       console.error('Error during registration:', error);
       alert('There was an error processing your registration. Please try again.');

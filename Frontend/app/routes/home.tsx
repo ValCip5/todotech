@@ -39,7 +39,6 @@ export default function Home() {
     
     <section id="nosotros" className="nosotros width1240">
       <div className="nosotros-text">
-      <img src="/assets/nosotros.webp" alt="Imagen" />
       <h2>
         Productos importados al menor precio
       </h2>
@@ -47,6 +46,7 @@ export default function Home() {
         En TodoTech trabajamos con los mejores proveedores para traerte los productos más novedosos al mejor
         precio.
       </p>
+      <img src="/assets/nosotros.png" alt="Tablet" />
       </div>
       <ul>
         <li>
@@ -68,7 +68,7 @@ export default function Home() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
         </svg>
         <h3>Devoluciones</h3>
-        <p>¿Pensas que te cagamos? No te preocupes, podes devolver el producto en 7 dias 
+        <p>¿Pensas que te estafamos? No te preocupes, podes devolver el producto en 7 dias 
            y te devolvemos la plata al toque</p>
         </li>
       </ul>

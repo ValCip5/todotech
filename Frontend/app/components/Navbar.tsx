@@ -6,6 +6,16 @@ interface DecodedToken {
   isAdmin: boolean;
 }
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  likeCount: number;
+  dislikeCount: number;
+}
+
 export function Navbar() {
   const [carritoAbierto, setCarritoAbierto] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -22,6 +32,7 @@ export function Navbar() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,7 +74,7 @@ export function Navbar() {
     navigate('/login');
   };
 
-  const removeItemFromCarrito = (index) => {
+  const removeItemFromCarrito = (index: number) => {
     const newItems = carritoItems.filter((_, i) => i !== index);
     setCarritoItems(newItems);
   };
@@ -71,6 +82,12 @@ export function Navbar() {
   const handleComprar = async () => {
     try {
       const token = localStorage.getItem('authToken');
+      if (!token) {
+        alert('Debes iniciar sesión para realizar una compra');
+        navigate('/login');
+        return;
+      }
+
       const response = await fetch('http://localhost:3000/api/purchases', {
         method: 'POST',
         headers: {
@@ -86,40 +103,59 @@ export function Navbar() {
 
       setCarritoItems([]);
       setCarritoAbierto(false);
-      alert('Purchase successful!');
-      navigate('/historialdecompras'); // Redirect to the purchase history page
+      alert('¡Compra realizada con éxito!');
+      navigate('/historialdecompras');
     } catch (error) {
       console.error('Error during purchase:', error);
-      alert('There was an error processing your purchase. Please try again.');
+      alert('Hubo un error al procesar tu compra. Por favor, intenta nuevamente.');
     }
   };
 
   return (
     <header>
-      <h1>TodoTech</h1>
-      <nav>
+      <h1><img src="/assets/logo.png" alt="Logo TodoTech"/></h1>
+      <nav className={isMenuOpen ? 'active' : ''}>
         <ul>
-          <div className="rutas">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/#nosotros">Nosotros</NavLink>
-            <NavLink to="/#productos">Productos</NavLink>
-            {isAdmin && <NavLink to="/panel">Panel</NavLink>}
-            {isAdmin && <NavLink to="/subirproducto">Subir Producto</NavLink>}
-          </div>
-          <div className="acciones">
-            {isLoggedIn ? (
-              <>
-                <NavLink to="/login" onClick={handleLogout}>Log out</NavLink>
-              </>
-            ) : (
-              <>
-                <NavLink to="/login">Log in</NavLink>
-                <NavLink to="/registrarse">Registrarse</NavLink>
-              </>
+          <li><div className="rutas">
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
+            <NavLink to="/#nosotros" onClick={() => setIsMenuOpen(false)}>Nosotros</NavLink>
+            <NavLink to="/#productos" onClick={() => setIsMenuOpen(false)}>Productos</NavLink>
+            {isAdmin && <NavLink to="/panel" onClick={() => setIsMenuOpen(false)}>Panel</NavLink>}
+            {isAdmin && <NavLink to="/subirproducto" onClick={() => setIsMenuOpen(false)}>Subir Producto</NavLink>}
+            {isLoggedIn && (
+              <NavLink to="/historialdecompras" onClick={() => setIsMenuOpen(false)}>
+                Historial de compras
+              </NavLink>
             )}
-            <button className="botonCarrito" onClick={() => setCarritoAbierto(true)}>Carrito
-            </button>
           </div>
+          </li>
+          <li>
+            <button 
+              className="menuToggle"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <div className="acciones">
+              {isLoggedIn ? (
+                <>
+                  <NavLink to="/login" onClick={handleLogout}>Log out</NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink to="/login" onClick={() => setIsMenuOpen(false)}>Log in</NavLink>
+                  <NavLink to="/registrarse" onClick={() => setIsMenuOpen(false)}>Registrarse</NavLink>
+                </>
+              )}
+              <button className="botonCarrito" onClick={() => setCarritoAbierto(true)}>
+                Carrito
+              </button>
+            </div>
+          </li>
         </ul>
       </nav>
 
@@ -128,7 +164,7 @@ export function Navbar() {
           <div className="contenidoCarrito">
             <h2>Carrito</h2>
             <ul>
-              {carritoItems.map((item, index) => (
+              {carritoItems.map((item: Product, index: number) => (
                 <li key={index}>
                   <div>
                     <p className="nombreP">{item.name}</p>
@@ -140,7 +176,7 @@ export function Navbar() {
             </ul>
             {carritoItems.length > 0 ? (
               <>
-                <p className="totalP">Total: ${carritoItems.reduce((acc, item) => acc + item.price, 0)}</p>
+                <p className="totalP">Total: ${carritoItems.reduce((acc: number, item: Product) => acc + item.price, 0)}</p>
                 <button className="comprar" onClick={handleComprar}>Comprar</button>
               </>
             ) : (

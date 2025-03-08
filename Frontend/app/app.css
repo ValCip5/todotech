@@ -20,6 +20,11 @@ h2{
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
   letter-spacing: -0.3px;
+  scroll-behavior: smooth;
+}
+
+body{
+  min-height: 100vh;
 }
 
 a{
@@ -30,9 +35,133 @@ button:hover{
   cursor: pointer;
 }
 
-header{
-  padding: 24px 48px 24px 48px;
+/* Keep your existing styles and update/add these ones */
+
+header {
+  padding: 24px 48px;
   border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: white;
+}
+
+nav {
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  width: auto;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+nav ul li:first-child{
+  width: 100%;
+}
+
+.rutas {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 24px;
+}
+
+.acciones {
+  white-space: nowrap;
+  display: flex;
+  flex: none;
+  justify-content: end;
+  align-items: center;
+  gap: 24px;
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.menuToggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1040px) {
+  header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+  }
+
+  .menuToggle {
+    display: block;
+    position: absolute;
+    right: 48px;
+    top: 24px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0px;
+  }
+
+  nav ul li {
+    justify-content: center;
+  }
+
+  .rutas {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .acciones {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  nav.active .rutas,
+  nav.active .acciones {
+    display: flex;
+  }
+
+  nav.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: fit-content;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 80px 48px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+
+  nav ul li:last-child{
+    width: 100%;
+  }
+
+  nav ul li div{
+    align-items: center !important;
+  }
 }
 
 header a{
@@ -63,6 +192,7 @@ section{
 }
 
 .modalCarrito {
+  z-index: 100;
   position: fixed;
   top: 0;
   right: 0;
@@ -117,40 +247,16 @@ section{
   font-weight: 600;
 }
 
-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .width1240{
   max-width: 1240px;
   margin: 0 auto;
 }
 
-nav{
-  width: 100%;
-}
-
-nav ul{
-  display: flex;
-  width: auto;
-  list-style: none;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-}
-
-.rutas{
+h1 {
+  z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 24px;
-}
-
-h1{
-  flex: 0 0 350px;
+  height: 100%;
 }
 
 .superTitulo{
@@ -159,15 +265,6 @@ h1{
 
 .hero p{
   font-size: 20px;
-}
-
-.acciones{
-  width: 350px;
-  display: flex;
-  flex: none;
-  justify-content: end;
-  align-items: center;
-  gap: 24px;
 }
 
 .hero{
@@ -206,13 +303,21 @@ button {
   border-radius: 16px;
 }
 
+.nosotros img{
+  max-width: 350px;
+  margin-top: 24px;
+}
+
 .productos{
   padding: 128px 64px 128px 64px;
 }
 
 .nosotros ul li{
   list-style: none;
-  margin-bottom: 48px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ebebeb;
+  border-radius: 8px;
 }
 
 .nosotros ul li:last-child{
@@ -295,18 +400,18 @@ form{
   flex-direction: column;
 }
 
-.usuario, .panel{
+.usuario, .panel, .historialCompras{
   padding: 128px 64px 128px 64px;
 }
 
-.tablaExaminarUsuario, .tablaPanel{
+.tablaExaminarUsuario, .tablaPanel, .tablaCompras{
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   width: 100%;
   border-collapse: collapse;
 }
 
-.usuario h2{
+.usuario h2, .historialCompras h2{
   margin-bottom: 48px;
 }
 
@@ -323,6 +428,10 @@ td{
 
 .usuarioDetalles{
   list-style: none;
+}
+
+.usuario{
+  padding-bottom: 340px;
 }
 
 .primero{
@@ -473,14 +582,9 @@ textarea{
   padding: 128px 64px 128px 64px;
 }
 
-.productoSolo ul li{
+.productoContenido{
   display: flex;
   gap: 64px;
-  width: 100%;
-}
-
-.productoSolo ul li{
-  width: 100%;
 }
 
 .izq, .der{
@@ -596,4 +700,139 @@ form label{
   width: 100%;
   height: 400px;
   object-fit: cover;
+}
+
+.errorContainer {
+  background-color: #fff2f2;
+  border: 1px solid #ef4444;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.formularioLogin {
+  width: 480px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+  border-radius: 8px;
+  margin-top: 48px;
+}
+
+@media (max-width: 1040px) {
+  .productos ul li{
+    width: calc(50% - 16px);
+  }
+}
+
+@media (max-width: 800px) {
+  h1{
+    flex: 0 0 100%;
+  }
+
+  .productos ul li{
+    width: 100%;
+  }
+  
+  .nosotros{
+    flex-direction: column;
+  }
+
+  header{
+    padding: 24px 16px 24px 16px;
+  }
+
+  .menuToggle {
+    right: 16px !important;
+    top: 19px !important;
+    position: absolute; 
+  }
+
+  nav.active .menuToggle {
+    position: fixed;
+    right: 16px !important;
+    top: 19px !important;
+  }
+
+  .hero{
+    padding: 56px 16px 56px 16px;
+  }
+
+  h2{
+    font-size: 36px;
+  }
+
+  .hero h2{
+    font-size: 36px;
+  }
+
+  .nosotros, .productos{
+    border-radius: 0px;
+    padding: 56px 16px 56px 16px;
+  }
+
+  .nosotros img{
+    max-width: 100%;
+  }
+
+  .productoSolo{
+    padding: 56px 16px 56px 16px;
+  }
+
+  .productoContenido{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .productoContenido img{
+    height: 100%;
+  }
+
+  footer{
+    text-align: center;
+  }
+
+  footer p{
+    width: fit-content;
+  }
+
+  .realizarComentario{
+    margin-top: 56px;
+    margin-bottom: 56px;
+  }
+
+  .seccionLogin, .seccionRegistrarse, .panel, .usuario, .historialCompras{
+    padding: 56px 16px 56px 16px;
+  }
+
+  .historialCompras h2{
+    margin-bottom: 24px;
+  }
+
+  .formularioLogin, .formularioRegistrarse{
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .tablaPanel, .tablaExaminarUsuario, .tablaCompras{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .contenidoCarrito {
+    background: white;
+    padding: 20px;
+    width: 350px;
+    height: 100%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+
+  .usuario h2{
+    margin-bottom: 24px;
+  }
 }

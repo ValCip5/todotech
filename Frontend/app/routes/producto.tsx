@@ -72,8 +72,7 @@ export default function Producto() {
     <>
       <Navbar />
       <section className='width1240 productoSolo'>
-        <ul>
-          <li>
+        <div className='productoContenido'>
             <div className='izq'>
               <img src={product.image} alt={product.name} />
             </div>
@@ -97,8 +96,7 @@ export default function Producto() {
             <p>Precio: <strong>${product.price}</strong></p>
             <button className='botonCarrito solo' onClick={() => addToCart(product)}>Agregar al Carrito</button>
             </div>
-          </li>
-        </ul>
+        </div>
 
         <div className="realizarComentario">
           <p>Dejá tu comentario</p>
