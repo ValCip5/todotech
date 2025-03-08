@@ -28,7 +28,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/users', userRoutes);
-pp.use('/api/comments', commentRoutes);
+app.use('/api/comments', commentRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
