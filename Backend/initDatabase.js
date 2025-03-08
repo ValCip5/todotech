@@ -115,11 +115,9 @@ async function initDatabase() {
   }])
 
   await Category.bulkCreate([{
-    name: 'Sonido',
-    description: 'Artículos de entrada/salida de sonido'
+    name: 'Sonido'
   }, {
-    name: 'Teclados',
-    description: 'Teclados de todo tipo, facheros, feitos, maleducados, etc.'
+    name: 'Teclados'
   }])
 
   await Product.bulkCreate([{
@@ -127,13 +125,13 @@ async function initDatabase() {
     description: 'Muy piolas',
     price: 5999.99,
     categoryId: 1,
-    userId: 2
+    image: 'https://www.infopartes.com.ar/18723-thickbox_default/auriculares-gamer-redragon-pelops-h818-71-inalambrico-pcps4.jpg'
   }, {
     name: 'Teclado gamer Noga',
     description: 'Re villeros para ser verdat',
     price: 8500,
     categoryId: 2,
-    userId: 2
+    image: 'https://sistema.langtecnologia.com.ar/img/qloud/4817/5151_1.jpg'
   }])
 
   await Comment.bulkCreate([{

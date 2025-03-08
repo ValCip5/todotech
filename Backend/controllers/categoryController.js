@@ -11,7 +11,6 @@ const add = async (req, res) => {
   } else {
     let category = {
       name: req.body.name,
-      description: req.body.description
     }
     
     category = await Category.create(category);
@@ -27,8 +26,6 @@ const update = async (req, res) => {
   } else {
     category.update({
       name: req.body.name,
-      description: req.body.description,
-      categoryId: req.body.categoryId
     });
   
     res.json(category.toJSON());

@@ -11,6 +11,9 @@ const Product = sequelize.define('Product', {
   price: {
     type: DataTypes.DECIMAL
   },
+  image: {
+    type: DataTypes.STRING
+  },
   likeCount: {
     type: DataTypes.INTEGER,
     defaultValue: 0
