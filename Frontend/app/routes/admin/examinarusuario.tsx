@@ -8,7 +8,7 @@ export async function clientLoader() {
   return checkAuthAdmin();
 }
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
     { title: "TodoTech" },
     { name: "description", content: "Bienvenido a TodoTech, tu mejor tienda de tecnología." },
@@ -25,7 +25,7 @@ interface User {
 
 interface Comment {
   id: number;
-  date: string;
+  createdAt: string;
   text: string;
 }
 
@@ -35,21 +35,22 @@ export default function ExaminarUsuario() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalComentarioVisible, setModalComentarioVisible] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState<number | null>(null); // Nuevo estado para guardar el ID del comentario
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem("authToken");
         const response = await fetch(`http://localhost:3000/api/users/${id}`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await response.json();
         setUser(data.user);
         setComments(data.comments);
       } catch (error) {
-        console.error('Error fetching user:', error);
+        console.error("Error fetching user:", error);
       }
     }
 
@@ -66,55 +67,59 @@ export default function ExaminarUsuario() {
 
   const aceptar = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem("authToken");
       const response = await fetch(`http://localhost:3000/api/users/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete user');
+        throw new Error("Failed to delete user");
       }
 
       setModalVisible(false);
-      alert('User deleted successfully');
-      // Optionally, redirect to another page
+      alert("User deleted successfully");
+      // Redireccionar o actualizar la vista si es necesario
     } catch (error) {
-      console.error('Error deleting user:', error);
-      alert('There was an error deleting the user. Please try again.');
+      console.error("Error deleting user:", error);
+      alert("There was an error deleting the user. Please try again.");
     }
   };
 
   const borrarComentario = (commentId: number) => {
+    setCommentToDelete(commentId); // Guarda el ID del comentario a eliminar
     setModalComentarioVisible(true);
   };
 
   const cerrarModalComentario = () => {
     setModalComentarioVisible(false);
+    setCommentToDelete(null); // Resetea el estado al cerrar el modal
   };
 
-  const aceptarComentario = async (commentId: number) => {
+  const aceptarComentario = async () => {
+    if (commentToDelete === null) return;
+
     try {
-      const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
-        method: 'DELETE',
+      const token = localStorage.getItem("authToken");
+      const response = await fetch(`http://localhost:3000/api/comments/${commentToDelete}`, {
+        method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete comment');
+        throw new Error("Failed to delete comment");
       }
 
-      setComments(comments.filter(comment => comment.id !== commentId));
-      setModalComentarioVisible(false);
-      alert('Comment deleted successfully');
+      setComments(comments.filter((comment) => comment.id !== commentToDelete));
+      cerrarModalComentario();
+      alert("Comment deleted successfully");
     } catch (error) {
-      console.error('Error deleting comment:', error);
-      alert('There was an error deleting the comment. Please try again.');
+      console.error("Error deleting comment:", error);
+      alert("There was an error deleting the comment. Please try again.");
     }
   };
 
@@ -161,7 +166,7 @@ export default function ExaminarUsuario() {
             <tbody>
               {comments.map((comment) => (
                 <tr key={comment.id}>
-                  <td>{new Date(comment.date).toLocaleDateString()}</td>
+                  <td>{new Date(comment.createdAt).toLocaleDateString()}</td>
                   <td>{comment.text}</td>
                   <td>
                     <button onClick={() => borrarComentario(comment.id)}>Borrar comentario</button>
@@ -171,14 +176,16 @@ export default function ExaminarUsuario() {
             </tbody>
           </table>
         ) : (
-          <p>Éste usuario aún no ha comentado.</p>
+          <p>Este usuario aún no ha comentado.</p>
         )}
       </section>
 
       {modalVisible && (
         <div className="modal">
           <div className="modalContenido">
-            <span className="cerrar" onClick={cerrarModal}>&times;</span>
+            <span className="cerrar" onClick={cerrarModal}>
+              &times;
+            </span>
             <h2>¿Estás seguro de borrar esta cuenta?</h2>
             <p>Esta acción no se puede deshacer.</p>
             <div className="modalAcciones">
@@ -192,7 +199,9 @@ export default function ExaminarUsuario() {
       {modalComentarioVisible && (
         <div className="modal">
           <div className="modalContenido">
-            <span className="cerrar" onClick={cerrarModalComentario}>&times;</span>
+            <span className="cerrar" onClick={cerrarModalComentario}>
+              &times;
+            </span>
             <h2>¿Estás seguro que deseas borrar este comentario?</h2>
             <p>Esta acción no se puede deshacer.</p>
             <div className="modalAcciones">

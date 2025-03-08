@@ -39,7 +39,7 @@ export default function Home() {
     
     <section id="nosotros" className="nosotros width1240">
       <div className="nosotros-text">
-      <img src="https://via.placeholder.com/150" alt="Imagen" />
+      <img src="/assets/nosotros.webp" alt="Imagen" />
       <h2>
         Productos importados al menor precio
       </h2>
