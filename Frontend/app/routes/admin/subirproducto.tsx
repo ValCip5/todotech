@@ -143,8 +143,8 @@ export default function SubirProducto() {
       setImagen('');
       setSelectedCategory(null);
     } catch (error) {
-      console.error('Error uploading product:', error);
-      alert('There was an error uploading the product. Please try again.');
+      console.error('Error al subir el producto:', error);
+      alert('Hubo un error al subir el producto, intente nuevamente');
     }
   };
 
@@ -188,7 +188,7 @@ export default function SubirProducto() {
             />
           </div>
           <div className="grupoFormulario">
-            <label htmlFor="imagen">Imagen</label>
+            <label htmlFor="imagen">Imagen (URL)</label>
             <input
               type="text"
               id="imagen"
@@ -244,8 +244,7 @@ export default function SubirProducto() {
       {modalVisible && (
         <div className="modal">
           <div className="modalContenido">
-            <span className="cerrar" onClick={() => setModalVisible(false)}>&times;</span>
-            <h2>Crear nueva categoría</h2>
+            <h3>Crear nueva categoría</h3>
             <div className="grupoFormulario">
               <label htmlFor="newCategoryName">Nombre de la categoría</label>
               <input
@@ -257,8 +256,8 @@ export default function SubirProducto() {
               />
             </div>
             <div className="modalAcciones">
-              <button onClick={handleCreateCategory}>Aceptar</button>
-              <button onClick={() => setModalVisible(false)}>Cancelar</button>
+              <button className="botonGeneral" onClick={handleCreateCategory}>Aceptar</button>
+              <button className="botonSecundario" onClick={() => setModalVisible(false)}>Cancelar</button>
             </div>
           </div>
         </div>
@@ -267,12 +266,11 @@ export default function SubirProducto() {
       {deleteModalVisible && (
         <div className="modal">
           <div className="modalContenido">
-            <span className="cerrar" onClick={closeDeleteModal}>&times;</span>
-            <h2>¿Estás seguro de eliminar esta categoría?</h2>
+            <h3>¿Estás seguro de eliminar esta categoría?</h3>
             <p>Esta acción no se puede deshacer.</p>
             <div className="modalAcciones">
-              <button onClick={handleDeleteCategory}>Aceptar</button>
-              <button onClick={closeDeleteModal}>Cancelar</button>
+              <button className="botonEliminar porEliminar" onClick={handleDeleteCategory}>Aceptar</button>
+              <button className="botonGeneral" onClick={closeDeleteModal}>Cancelar</button>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@
 :root{
   --heading-color: #0f0f0f;
   --paragraph-color: #4f4f4f;
+  --hover: #535353;
 }
 
 h2, h3, h4, h5, h6{
@@ -35,8 +36,6 @@ button:hover{
   cursor: pointer;
 }
 
-/* Keep your existing styles and update/add these ones */
-
 header {
   padding: 24px 48px;
   border-bottom: 1px solid #e0e0e0;
@@ -57,7 +56,7 @@ nav ul {
   list-style: none;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 nav ul li:first-child{
@@ -289,9 +288,12 @@ h1 {
   margin: auto;
 } 
 
+.botonHero:hover{
+  background-color: var(--hover);
+};
+
 button {
   outline: none;
-  border: none;
 }
 
 .nosotros{
@@ -345,6 +347,10 @@ button {
   list-style: none;
   width: calc(25% - 16px);
   box-sizing: border-box;
+}
+
+.productos ul li:hover{
+  background: #f7f7f7;
 }
 
 .descri{
@@ -401,7 +407,7 @@ form{
 }
 
 .usuario, .panel, .historialCompras{
-  padding: 128px 64px 128px 64px;
+  padding: 128px 64px 335px 64px;
 }
 
 .tablaExaminarUsuario, .tablaPanel, .tablaCompras{
@@ -458,6 +464,37 @@ td{
   width: 400px;
   text-align: center;
   position: relative;
+}
+
+.modalAcciones{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.modalContenido p{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.modalContenido label{
+  margin-top: 12px;
+}
+
+.botonSecundario{
+  padding: 8px 16px 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.grupoFormulario{
+  label{
+    margin-bottom: 4px;
+  }
 }
 
 .subirProducto{
@@ -530,6 +567,11 @@ td{
   outline: unset;
   font-size: 16px;
   font-weight: 600;
+  border: 1px solid #0f0f0f;
+}
+
+.botonCarrito:hover{
+  background-color: #535353;
 }
 
 .acciones .botonCarrito{
@@ -608,6 +650,12 @@ textarea{
   color: #fff;
   outline: unset;
   font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #0f0f0f;
+}
+
+.botonGeneral:hover{
+  background-color: #303030;
 }
 
 .comentarioHecho{
@@ -628,7 +676,7 @@ h4{
   font-size: 20px;
 }
 
-form input, select{
+form input, select, .modalContenido input{
   padding: 8px 4px 8px 4px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
@@ -644,7 +692,7 @@ form label{
   padding: 11px 16px 10px 16px;
   font-weight: 600;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 8px;
   color: #fff;
   background: #0f0f0f;
 }
@@ -668,13 +716,22 @@ form label{
   font-weight: 600;
 }
 
-.tablaPanel button:last-child, .tablaCategorias button, .tablaExaminarUsuario button{
+.tablaPanel button:last-child, .tablaCategorias button, .tablaExaminarUsuario button, .botonEliminar{
   padding: 8px 12px 8px 12px;
   background: #ff3333;
+  border: 1px solid #ff3333;
   color: #fff;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.porEliminar{
+  height: fit-content;
+}
+
+.tablaPanel button:last-child:hover, .tablaCategorias button:hover, .tablaExaminarUsuario button:hover{
+  background: #ff7a7a;
 }
 
 .formularioSubirProductos button, .crearC{
@@ -684,6 +741,11 @@ form label{
   color: #fff;
   font-weight: 600;
   font-size: 14px;
+  border: 1px solid #0f0f0f;
+}
+
+.formularioSubirProductos button:hover, .crearC:hover{
+background: var(--hover);
 }
 
 .formularioSubirProductos{

@@ -107,7 +107,7 @@ export default function Panel() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className='encontrarU' onClick={handleSearch}>Buscar usuario</button>
+        <button className='encontrarU botonGeneral' onClick={handleSearch}>Buscar usuario</button>
         <table className="tablaPanel primero">
           <thead>
             <tr>
@@ -138,12 +138,11 @@ export default function Panel() {
       {modalVisible && (
         <div className="modal">
           <div className="modalContenido">
-            <span className="cerrar" onClick={cerrarModal}>&times;</span>
-            <h2>¿Estás seguro de borrar esta cuenta?</h2>
+            <h3>¿Estás seguro de borrar esta cuenta?</h3>
             <p>Esta acción no se puede deshacer.</p>
             <div className="modalAcciones">
-              <button onClick={aceptar}>Aceptar</button>
-              <button onClick={cerrarModal}>Cancelar</button>
+              <button className='botonEliminar porEliminar' onClick={aceptar}>Aceptar</button>
+              <button className='botonGeneral' onClick={cerrarModal}>Cancelar</button>
             </div>
           </div>
         </div>
