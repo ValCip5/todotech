@@ -124,7 +124,10 @@ const dislike = async (req, res) => {
     dislikeCount: newDislikeCount
   })
 
-  res.json(recommendation.toJSON());
+  res.json({
+    product: product.toJSON(),
+    recommendation: recommendation.toJSON()
+  });
 }
 
 const purchase = async (req, res) => {
