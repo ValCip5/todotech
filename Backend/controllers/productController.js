@@ -51,9 +51,11 @@ const update = async (req, res) => {
 const like = async (req, res) => {
 
   const [recommendation, created] = await ProductRecommendation.findOrCreate({
-    where: { userId: req.user.id },
+    where: { userId: req.user.id, productId: req.params.id },
     defaults: {
       like: true,
+      userId: req.user.id,
+      productId: req.params.id
     },
   });
 
