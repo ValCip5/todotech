@@ -103,4 +103,11 @@ const comment = async (req, res) => {
   res.json({ ...comment.toJSON(), user: req.user });
 }
 
-module.exports = { list, find, add, update, like, purchase, comment };
+const findLoggedUserRecommendation = async (req, res) => {
+  const recommendation = await ProductRecommendation.findOne( {
+    where: { userId: req.user.id, productId: req.params.id },
+  } ).toJSON();
+  res.json(recommendation);
+}
+
+module.exports = { list, find, add, update, like, purchase, comment, findLoggedUserRecommendation };
