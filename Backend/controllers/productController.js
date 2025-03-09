@@ -95,7 +95,7 @@ const purchase = async (req, res) => {
 
 const comment = async (req, res) => {
   const comment = await Comment.create({
-    productId: req.path.productId,
+    productId: req.path.id,
     userId: req.user.id,
     text: req.body.text
   });
