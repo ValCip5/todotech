@@ -86,6 +86,44 @@ const like = async (req, res) => {
   res.json(recommendation.toJSON());
 }
 
+const dislike = async (req, res) => {
+
+  const [recommendation, created] = await ProductRecommendation.findOrCreate({
+    where: { userId: req.user.id, productId: req.params.id },
+    defaults: {
+      like: false,
+      userId: req.user.id,
+      productId: req.params.id
+    },
+  });
+
+  const product = await Product.findByPk(req.params.id);
+
+  let newLikeCount = null;
+  let newDislikeCount = null;
+
+  if (!created) {
+    if (recommendation.like) {
+      newLikeCount = product.likeCount - 1;
+      newDislikeCount = product.dislikeCount + 1;
+    }
+  } else {
+    newLikeCount = product.likeCount;
+    newDislikeCount = product.dislikeCount + 1;
+  }
+
+  await recommendation.update({
+    like: false
+  })
+
+  await product.update({
+    likeCount: newLikeCount,
+    dislikeCount: newDislikeCount
+  })
+
+  res.json(recommendation.toJSON());
+}
+
 const purchase = async (req, res) => {
   const purchase = await Purchase.create({
     productId: req.params.id,
@@ -112,4 +150,4 @@ const findLoggedUserRecommendation = async (req, res) => {
   res.json(recommendation ? recommendation.toJSON() : null);
 }
 
-module.exports = { list, find, add, update, like, purchase, comment, findLoggedUserRecommendation };
+module.exports = { list, find, add, update, like, dislike, purchase, comment, findLoggedUserRecommendation };
