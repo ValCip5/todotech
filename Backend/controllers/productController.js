@@ -100,7 +100,7 @@ const comment = async (req, res) => {
     text: req.body.text
   });
 
-  res.json(comment.toJSON());
+  res.json({ ...comment.toJSON(), user: req.user });
 }
 
 module.exports = { list, find, add, update, like, purchase, comment };
