@@ -104,9 +104,9 @@ const comment = async (req, res) => {
 }
 
 const findLoggedUserRecommendation = async (req, res) => {
-  const recommendation = await ProductRecommendation.findOne( {
+  const recommendation = (await ProductRecommendation.findOne( {
     where: { userId: req.user.id, productId: req.params.id },
-  } ).toJSON();
+  })).toJSON();
   res.json(recommendation);
 }
 
