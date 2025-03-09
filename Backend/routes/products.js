@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/authMiddleware')
-const { list, find, add, update, like, purchase } = require('../controllers/productController');
+const { list, find, add, update, like, purchase, comment } = require('../controllers/productController');
 
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router.get('/', list)
   .post('/', authMiddleware, add)
   .put('/:id', authMiddleware, update)
   .post(':id/recommendations', authMiddleware, like)
-  .post(':id/purchases', authMiddleware, like, purchase);
+  .post(':id/purchases', authMiddleware, purchase)
+  .post(':id/comment', authMiddleware, comment);
 
 module.exports = router;

@@ -93,4 +93,14 @@ const purchase = async (req, res) => {
   res.json(purchase.toJSON());
 }
 
-module.exports = { list, find, add, update, like, purchase };
+const comment = async (req, res) => {
+  const comment = await Comment.create({
+    productId: req.path.productId,
+    userId: req.user.id,
+    text: req.body.text
+  });
+
+  res.json(comment.toJSON());
+}
+
+module.exports = { list, find, add, update, like, purchase, comment };
