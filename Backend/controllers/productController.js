@@ -76,12 +76,12 @@ const like = async (req, res) => {
     like: true
   })
 
-  product.update({
+  await product.update({
     likeCount: newLikeCount,
     dislikeCount: newDislikeCount
   })
 
-  res.json(product.toJSON());
+  res.json(recommendation.toJSON());
 }
 
 const purchase = async (req, res) => {
@@ -104,10 +104,10 @@ const comment = async (req, res) => {
 }
 
 const findLoggedUserRecommendation = async (req, res) => {
-  const recommendation = (await ProductRecommendation.findOne( {
+  const recommendation = await ProductRecommendation.findOne({
     where: { userId: req.user.id, productId: req.params.id },
-  })).toJSON();
-  res.json(recommendation);
+  });
+  res.json(recommendation ? recommendation.toJSON() : null);
 }
 
 module.exports = { list, find, add, update, like, purchase, comment, findLoggedUserRecommendation };
