@@ -113,7 +113,7 @@ export function Navbar() {
 
   return (
     <header>
-      <h1><img src="/assets/logo.png" alt="Logo TodoTech"/></h1>
+      <h1><NavLink to="/"><img src="/assets/logo.png" alt="Logo TodoTech"/></NavLink></h1>
       <nav className={isMenuOpen ? 'active' : ''}>
         <ul>
           <li><div className="rutas">
@@ -134,9 +134,7 @@ export function Navbar() {
               className="menuToggle"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-              </svg>
+              <img className="navicon" src="/assets/menu.svg" alt="Menu" />
             </button>
           </li>
           <li>
