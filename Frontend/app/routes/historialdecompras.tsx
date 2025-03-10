@@ -33,7 +33,7 @@ export default function historialDeCompras() {
     async function fetchCompras() {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:3000/api/purchases/myPurchases', {
+        const response = await fetch('https://todotech.onrender.com/api/purchases/myPurchases', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

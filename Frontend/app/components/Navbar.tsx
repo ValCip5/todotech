@@ -88,7 +88,7 @@ export function Navbar() {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/api/purchases', {
+      const response = await fetch('https://todotech.onrender.com/api/purchases', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

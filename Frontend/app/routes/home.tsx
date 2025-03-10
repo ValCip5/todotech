@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchProductos() {
       try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch('https://todotech.onrender.com/api/products');
         const data = await response.json();
         setProductos(data);
       } catch (error) {

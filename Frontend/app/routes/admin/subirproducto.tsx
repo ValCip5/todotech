@@ -52,7 +52,7 @@ export default function SubirProducto() {
     async function fetchCategorias() {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:3000/api/categories', {
+        const response = await fetch('https://todotech.onrender.com/api/categories', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -138,7 +138,7 @@ export default function SubirProducto() {
   const handleCreateCategory = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:3000/api/categories', {
+      const response = await fetch('https://todotech.onrender.com/api/categories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ export default function SubirProducto() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3000/api/categories/${selectedCategoryId}`, {
+      const response = await fetch(`https://todotech.onrender.com/api/categories/${selectedCategoryId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -205,7 +205,7 @@ export default function SubirProducto() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:3000/api/products', {
+      const response = await fetch('https://todotech.onrender.com/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

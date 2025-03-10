@@ -8,7 +8,7 @@ interface JwtPayload {
 export async function checkAuth() {
   const token = localStorage.getItem('authToken');
 
-  const response = await fetch('http://localhost:3000/api/auth/verify', {
+  const response = await fetch('https://todotech.onrender.com/api/auth/verify', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -25,7 +25,7 @@ export async function checkAuth() {
 export async function checkAuthAdmin() {
   const token = localStorage.getItem('authToken');
 
-  const response = await fetch('http://localhost:3000/api/auth/verify', {
+  const response = await fetch('https://todotech.onrender.com/api/auth/verify', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,

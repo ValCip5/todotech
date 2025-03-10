@@ -38,7 +38,7 @@ export default function Panel() {
   const fetchUsers = async (username?: string) => {
     try {
       const token = localStorage.getItem('authToken');
-      const url = username ? `http://localhost:3000/api/users?username=${username}` : 'http://localhost:3000/api/users';
+      const url = username ? `https://todotech.onrender.com/api/users?username=${username}` : 'https://todotech.onrender.com/api/users';
       const response = await fetch(url, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -70,7 +70,7 @@ export default function Panel() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3000/api/users/${selectedUserId}`, {
+      const response = await fetch(`https://todotech.onrender.com/api/users/${selectedUserId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

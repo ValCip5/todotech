@@ -41,7 +41,7 @@ export default function ExaminarUsuario() {
     async function fetchUser() {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+        const response = await fetch(`https://todotech.onrender.com/api/users/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -68,7 +68,7 @@ export default function ExaminarUsuario() {
   const aceptar = async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+      const response = await fetch(`https://todotech.onrender.com/api/users/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ export default function ExaminarUsuario() {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:3000/api/comments/${commentToDelete}`, {
+      const response = await fetch(`https://todotech.onrender.com/api/comments/${commentToDelete}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

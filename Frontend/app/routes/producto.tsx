@@ -54,13 +54,13 @@ export default function Producto() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const productResponse = await fetch(`http://localhost:3000/api/products/${id}`);
+        const productResponse = await fetch(`https://todotech.onrender.com/api/products/${id}`);
         const productData = await productResponse.json();
         setProduct(productData);
 
         const token = localStorage.getItem('authToken');
         if (token) {
-          const recommendationResponse = await fetch(`http://localhost:3000/api/products/${id}/recommendation`, {
+          const recommendationResponse = await fetch(`https://todotech.onrender.com/api/products/${id}/recommendation`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -105,7 +105,7 @@ export default function Producto() {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3000/api/products/${id}/comment`, {
+      const response = await fetch(`https://todotech.onrender.com/api/products/${id}/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export default function Producto() {
       }
 
       const endpoint = like ? 'like' : 'dislike';
-      const response = await fetch(`http://localhost:3000/api/products/${id}/${endpoint}`, {
+      const response = await fetch(`https://todotech.onrender.com/api/products/${id}/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
