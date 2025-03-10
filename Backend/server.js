@@ -2,7 +2,7 @@ require('dotenv').config();
 
 // Sequelize
 const initDatabase = require('./initDatabase');
-// initDatabase(); // Comentar si no se quiere reiniciar la BD al iniciar el server
+initDatabase(true); // Poner en false si no se quiere reiniciar la BD al iniciar el server
 
 // Express
 const cors = require('cors');
