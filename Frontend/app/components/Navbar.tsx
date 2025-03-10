@@ -174,7 +174,7 @@ export function Navbar() {
             </ul>
             {carritoItems.length > 0 ? (
               <>
-                <p className="totalP">Total: ${carritoItems.reduce((acc: number, item: Product) => parseFloat(acc.toString()) + item.price, 0)}</p>
+                <p className="totalP">Total: ${carritoItems.reduce((acc: number, item: Product) => parseFloat(acc.toString()) + parseFloat(item.price.toString()), 0)}</p>
                 <button className="comprar" onClick={handleComprar}>Comprar</button>
               </>
             ) : (
