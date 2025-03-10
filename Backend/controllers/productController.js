@@ -25,6 +25,7 @@ const add = async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     categoryId: req.body.categoryId,
+    image: req.body.image
   }
 
   product = await Product.create(product);
@@ -41,7 +42,8 @@ const update = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
-      categoryId: req.body.categoryId
+      categoryId: req.body.categoryId,
+      image: req.body.image
     });
   
     res.json(product.toJSON());
