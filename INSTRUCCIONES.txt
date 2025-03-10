@@ -1,0 +1,11 @@
+FRONT: npm install, npm run dev
+
+BACK: npm install, node server.js
+
+BASE DE DATOS MySQL: 
+- Nombre: todotech
+- Usuario: todotech
+- Contraseña: t0d0t3ch
+
+SITIO WEB FUNCIONAL (Incluye base, back, front):
+https://todotech0.web.app/
