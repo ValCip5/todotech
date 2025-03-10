@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, username: user.username, email: user.email, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return jwt.sign({ id: user.id, username: user.username, email: user.email, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '10s' });
 };
 
 const register = async (req, res) => {
@@ -61,4 +61,8 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const verify = (req, res) => {
+  res.json(req.user);
+};
+
+module.exports = { register, login, verify };
