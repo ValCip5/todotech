@@ -2,37 +2,44 @@ import { redirect } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 interface JwtPayload {
-  exp: number;
-  iat: number;
-  [key: string]: any;
+  isAdmin: boolean
 }
 
 export async function checkAuth() {
   const token = localStorage.getItem('authToken');
-  
-  if (!token) {
+
+  const response = await fetch('http://localhost:3000/api/auth/verify', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    localStorage.removeItem('authToken');
     return redirect('/login');
   }
 
-  return token;
 }
 
 export async function checkAuthAdmin() {
   const token = localStorage.getItem('authToken');
-  
-  if (!token) {
-    return redirect('/notfound');
+
+  const response = await fetch('http://localhost:3000/api/auth/verify', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    localStorage.removeItem('authToken');
+    return redirect('/login');
   }
 
-  try {
-    const decodedToken = jwtDecode<JwtPayload>(token);
+  const user = await response.json();
     
-    if (!decodedToken.isAdmin) {
-      return redirect('/notfound');
-    }
-    return decodedToken;
-  } catch (error) {
+  if (!user.isAdmin) {
     return redirect('/notfound');
-  }
+  };
 }
-
