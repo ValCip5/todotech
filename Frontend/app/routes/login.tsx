@@ -17,18 +17,82 @@ export default function Login() {
     password: ''
   });
 
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    serverError: ''
+  });
+
+  const [touchedFields, setTouchedFields] = useState({
+    username: false,
+    password: false
+  });
+
   const navigate = useNavigate();
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    
+    switch (name) {
+      case 'username':
+        if (value.trim() === '') {
+          error = 'El usuario es requerido';
+        }
+        break;
+      case 'password':
+        if (value.trim() === '') {
+          error = 'La contraseña es requerida';
+        }
+        break;
+    }
+    
+    return error;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    
+    setTouchedFields(prev => ({
+      ...prev,
+      [name]: true
+    }));
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: validateField(name, value)
+    }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: value
-    });
+    }));
+
+    // Limpiar el error del servidor cuando el usuario comienza a escribir
+    if (errors.serverError) {
+      setErrors(prev => ({
+        ...prev,
+        serverError: ''
+      }));
+    }
+  };
+
+  const isFormValid = () => {
+    const allFieldsFilled = Object.values(formData).every(value => value.trim() !== '');
+    const noErrors = Object.values(errors).every(error => error === '');
+    const allFieldsTouched = Object.values(touchedFields).every(touched => touched);
+
+    return allFieldsFilled && noErrors && allFieldsTouched;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isFormValid()) {
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -41,15 +105,22 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('authToken', data.token); // Store the token in local storage
+        localStorage.setItem('authToken', data.token);
         alert('Login exitoso');
-        navigate('/'); // Redirect to the home page or a protected route
+        navigate('/');
       } else {
-        alert('Error en el login');
+        const errorData = await response.json();
+        setErrors(prev => ({
+          ...prev,
+          serverError: errorData.error || 'Credenciales inválidas'
+        }));
       }
     } catch (error) {
       console.error('Error en el login:', error);
-      alert('Error en el login');
+      setErrors(prev => ({
+        ...prev,
+        serverError: 'Error al conectar con el servidor'
+      }));
     }
   };
 
@@ -67,8 +138,12 @@ export default function Login() {
               name="username"
               value={formData.username}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
             />
+            {touchedFields.username && errors.username && 
+              <span className="error-message">{errors.username}</span>
+            }
           </div>
           <div className="grupoFormulario">
             <label htmlFor="password">Contraseña</label>
@@ -78,10 +153,25 @@ export default function Login() {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
             />
+            {touchedFields.password && errors.password && 
+              <span className="error-message">{errors.password}</span>
+            }
           </div>
-          <button className='botonLogin' type="submit">Login</button>
+          {errors.serverError && 
+            <div className="error-message server-error">
+              {errors.serverError}
+            </div>
+          }
+          <button 
+            className='botonLogin' 
+            type="submit"
+            disabled={!isFormValid()}
+          >
+            Login
+          </button>
         </form>
       </section>
       <Footer />

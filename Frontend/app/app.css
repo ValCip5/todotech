@@ -703,6 +703,44 @@ form label{
   background-color: #cccccc;
 }
 
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+}
+
+.comentarioerror{
+  margin-top: 12px;
+}
+
+.server-error{
+  color: #dc3545;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.botonRegistrarse:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #cccccc;
+}
+
+.errorMensajes{
+  display: flex;
+  flex-direction: column;
+}
+
+.grupoFormulario input {
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.grupoFormulario input:focus {
+  outline: none;
+  border-color: #0f0f0f;
+}
+
 .botonLogin, .botonRegistrarse, .encontrarU{
   padding: 11px 16px 10px 16px;
   font-weight: 600;

@@ -47,17 +47,16 @@ export default function Producto() {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [commentText, setCommentText] = useState('');
+  const [commentError, setCommentError] = useState('');
   const [hasRecommended, setHasRecommended] = useState(false);
   const [userRecommendation, setUserRecommendation] = useState<Recommendation | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        // Fetch product data
         const productResponse = await fetch(`http://localhost:3000/api/products/${id}`);
         const productData = await productResponse.json();
         setProduct(productData);
-
 
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -87,9 +86,23 @@ export default function Producto() {
     const cart = JSON.parse(localStorage.getItem('carrito') || '[]');
     cart.push(product);
     localStorage.setItem('carrito', JSON.stringify(cart));
+    alert('Producto agregado al carrito');
+  };
+
+  const validateComment = (text: string): boolean => {
+    if (text.length < 30) {
+      setCommentError('El comentario debe tener al menos 30 caracteres');
+      return false;
+    }
+    setCommentError('');
+    return true;
   };
 
   const handleComment = async () => {
+    if (!validateComment(commentText)) {
+      return;
+    }
+
     try {
       const token = localStorage.getItem('authToken');
       const response = await fetch(`http://localhost:3000/api/products/${id}/comment`, {
@@ -111,6 +124,7 @@ export default function Producto() {
         comments: [...prevProduct!.comments, newComment]
       }));
       setCommentText('');
+      setCommentError('');
       alert('Comentario publicado exitosamente');
     } catch (error) {
       console.error('Error posting comment:', error);
@@ -141,7 +155,6 @@ export default function Producto() {
 
       const { product, recommendation } = await response.json();
       
-      // Si el usuario ya recomendó y está seleccionando la misma opción
       if (hasRecommended && userRecommendation?.like === like) {
         setHasRecommended(false);
         setUserRecommendation(null);
@@ -150,7 +163,6 @@ export default function Producto() {
         setUserRecommendation({ like });
       }
 
-      // Actualizamos los contadores con los valores del backend
       setProduct(prevProduct => ({
         ...prevProduct!,
         likeCount: product.likeCount,
@@ -201,12 +213,19 @@ export default function Producto() {
           <p>Dejá tu comentario</p>
           <textarea 
             value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
+            onChange={(e) => {
+              setCommentText(e.target.value);
+              validateComment(e.target.value);
+            }}
           ></textarea>
+          <div className='errorMensajes'>
+          {commentError && <span className="error-message comentarioerror">{commentError}</span>}
           <button 
             className='botonGeneral comentar'
             onClick={handleComment}
+            disabled={commentText.length < 30}
           >Comentar</button>
+          </div>
           <div>
             <p>
               {hasRecommended 
@@ -248,3 +267,4 @@ export default function Producto() {
     </>
   );
 }
+
