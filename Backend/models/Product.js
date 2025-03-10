@@ -6,7 +6,7 @@ const Product = sequelize.define('Product', {
     type: DataTypes.STRING,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   price: {
     type: DataTypes.DECIMAL
